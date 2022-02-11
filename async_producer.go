@@ -675,7 +675,7 @@ func (p *asyncProducer) newBrokerProducer(broker *Broker) *brokerProducer {
 	var (
 		input     = make(chan *ProducerMessage)
 		bridge    = make(chan *produceSet)
-		responses = make(chan *brokerProducerResponse)
+		responses = make(chan *brokerProducerResponse, p.conf.Net.MaxOpenRequests)
 	)
 
 	bp := &brokerProducer{
